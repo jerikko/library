@@ -1,0 +1,11 @@
+/* CSS */
+
+.book-card {
+    border: 1px solid black;
+    margin: 24px auto;
+    padding: 24px;
+}
+
+button {
+    margin-right: 8px;
+}
