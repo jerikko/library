@@ -1,4 +1,7 @@
-let myLibrary = []
+let myLibrary = JSON.parse(localStorage.getItem('userLibrary'))
+if (!myLibrary) myLibrary = []
+
+
 const originalDiv = document.querySelector('.book-list')
 const newBookBtn = document.querySelector('.new-book')
 newBookBtn.addEventListener('click', addBookToLibrary)
@@ -24,6 +27,7 @@ function addBookToLibrary() {
 
     const book = new Book(title, author, pages, haveRead)
     myLibrary.push(book)
+    localStorage.setItem('userLibrary', JSON.stringify(myLibrary))
     originalDiv.innerHTML = ''
     displayBook()
     console.log(myLibrary)
@@ -31,6 +35,8 @@ function addBookToLibrary() {
 
 function displayBook() {
     
+    localStorage.setItem('userLibrary', JSON.stringify(myLibrary))
+
     for (const book of myLibrary) {                                     // for/of vs (x)for/in vs forEach()?
         
         
@@ -106,6 +112,8 @@ function removeBook(event) {
         }
     }
 
+    localStorage.setItem('userLibrary', JSON.stringify(myLibrary))
+
 
     // console.log(event.target)
     // console.log(event.target.classList)
@@ -125,27 +133,33 @@ function changeReadStatus(event) {
     for (let i=0; i < divs.length; i++) {
         if (event.target.classList[1] == divs[i].classList[1]) {        // key: 1 contains pseudo-id identifier
             myLibrary[i].haveRead = !myLibrary[i].haveRead              // toggles 'read' status
-        
+
             if (myLibrary[i].haveRead) {
                 readStatus = "Yes" 
             } else readStatus = "No"
             
-            document.querySelector(`.haveRead ${i}`).textContent = `Have you read it? ${readStatus}`
+            let pHaveReads = document.querySelectorAll('.haveRead')
+            console.log(pHaveReads)
+            
+            
         }
 
 
-        
+    localStorage.setItem('userLibrary', JSON.stringify(myLibrary))
         
     }
 }
 
 
-const book1 = new Book('Harry Potter', 'J.K. Rowling', 1000, true)
-myLibrary.push(book1)
-// console.log(book1.info())
+// const book1 = new Book('Harry Potter', 'J.K. Rowling', 1000, true)
+// myLibrary.push(book1)
+// // console.log(book1.info())
 
-const book2 = new Book('Comoran Strike', 'Robert Galbraith', 500, false)
-myLibrary.push(book2)
-// console.log(book2.info())
+// const book2 = new Book('Comoran Strike', 'Robert Galbraith', 500, false)
+// myLibrary.push(book2)
+// // console.log(book2.info())
+
 
 displayBook()
+
+
