@@ -138,10 +138,13 @@ function changeReadStatus(event) {
                 readStatus = "Yes" 
             } else readStatus = "No"
             
+
             let pHaveReads = document.querySelectorAll('.haveRead')
-            console.log(pHaveReads)
-            
-            
+            pHaveReads.forEach(p => {
+                if (p.classList.contains(i)) {
+                    p.textContent = `Have you read it? ${readStatus}`
+                }
+            })
         }
 
 
