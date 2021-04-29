@@ -67,9 +67,11 @@ function displayBook() {
 
 
         let readStatus
-        if (book.haveRead) {
+        if (book.haveRead == 'true') {
             readStatus = "Yes" 
-        } else readStatus = "No"
+        } else if (book.haveRead == 'false') {
+            readStatus = "No"
+        }
         haveRead.textContent = `Have you read it? ${readStatus}`
 
 
