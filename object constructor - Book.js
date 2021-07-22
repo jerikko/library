@@ -6,16 +6,16 @@ const originalDiv = document.querySelector('.book-list')
 const newBookBtn = document.querySelector('.new-book')
 newBookBtn.addEventListener('click', addBookToLibrary)
 
-function Book (title, author, pages, haveRead) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.haveRead = haveRead
-}
+// function Book (title, author, pages, haveRead) {
+//     this.title = title
+//     this.author = author
+//     this.pages = pages
+//     this.haveRead = haveRead
+// }
 
-Book.prototype.info = function() {
-    return `${this.title} by ${this.author} is ${this.pages} long. Finished reading: ${this.haveRead}`
-}
+// Book.prototype.info = function() {
+//     return `${this.title} by ${this.author} is ${this.pages} long. Finished reading: ${this.haveRead}`
+// }
 
 function addBookToLibrary() {
 
@@ -37,7 +37,6 @@ function addBookToLibrary() {
     localStorage.setItem('userLibrary', JSON.stringify(myLibrary))
     originalDiv.innerHTML = ''
     displayBook()
-    // console.log(myLibrary)
 }
 
 function displayBook() {
@@ -81,8 +80,6 @@ function displayBook() {
         }
         haveRead.textContent = `Have you read it? ${readStatus}`
 
-        /* BUG: adding new book changes entries' readStatus 
-                to undefined if 'read' status was toggled beforehand*/
 
         div.appendChild(title)
         div.appendChild(author)
@@ -165,6 +162,5 @@ function changeReadStatus(event) {
 
 
 displayBook()
-// console.log(myLibrary)
 
 
