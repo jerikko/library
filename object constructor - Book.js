@@ -22,7 +22,14 @@ function addBookToLibrary() {
     let title = prompt('Title of book?')
     let author = prompt('Author of book?')
     let pages = prompt('Number of pages?')
+
+    while (isNaN(pages)) pages = prompt('Please enter a number.')
     let haveRead = prompt('Have you read the book? (true or false)')
+
+    while (haveRead !== 'true' && haveRead !== 'false') haveRead = prompt(`Please type 'true' or 'false'.`)
+    
+    if (haveRead === 'true') haveRead = true
+    else if (haveRead === 'false') haveRead = false
 
 
     const book = new Book(title, author, pages, haveRead)
@@ -30,7 +37,7 @@ function addBookToLibrary() {
     localStorage.setItem('userLibrary', JSON.stringify(myLibrary))
     originalDiv.innerHTML = ''
     displayBook()
-    console.log(myLibrary)
+    // console.log(myLibrary)
 }
 
 function displayBook() {
@@ -67,13 +74,15 @@ function displayBook() {
 
 
         let readStatus
-        if (book.haveRead == 'true') {
+        if (book.haveRead === true) {
             readStatus = "Yes" 
-        } else if (book.haveRead == 'false') {
+        } else if (book.haveRead === false) {
             readStatus = "No"
         }
         haveRead.textContent = `Have you read it? ${readStatus}`
 
+        /* BUG: adding new book changes entries' readStatus 
+                to undefined if 'read' status was toggled beforehand*/
 
         div.appendChild(title)
         div.appendChild(author)
@@ -128,7 +137,6 @@ function removeBook(event) {
 
 function changeReadStatus(event) {
 
-
     let readStatus
 
     let divs = originalDiv.children                                     // originalDiv.children --> array-like collection
@@ -147,8 +155,8 @@ function changeReadStatus(event) {
                     p.textContent = `Have you read it? ${readStatus}`
                 }
             })
+            console.log(myLibrary[i])
         }
-
 
     localStorage.setItem('userLibrary', JSON.stringify(myLibrary))
         
@@ -156,15 +164,7 @@ function changeReadStatus(event) {
 }
 
 
-// const book1 = new Book('Harry Potter', 'J.K. Rowling', 1000, true)
-// myLibrary.push(book1)
-// // console.log(book1.info())
-
-// const book2 = new Book('Comoran Strike', 'Robert Galbraith', 500, false)
-// myLibrary.push(book2)
-// // console.log(book2.info())
-
-
 displayBook()
+// console.log(myLibrary)
 
 
