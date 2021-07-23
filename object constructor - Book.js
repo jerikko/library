@@ -17,6 +17,20 @@ newBookBtn.addEventListener('click', addBookToLibrary)
 //     return `${this.title} by ${this.author} is ${this.pages} long. Finished reading: ${this.haveRead}`
 // }
 
+class Book {
+    constructor (title, author, pages, haveRead) {
+        this.title = title
+        this.author = author
+        this.pages = author
+        this.haveRead = haveRead
+    }
+
+    info() {
+        return `${this.title} by ${this.author} is ${this.pages} long. Finished reading: ${this.haveRead}`
+    }
+
+}
+
 function addBookToLibrary() {
 
     let title = prompt('Title of book?')
